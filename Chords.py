@@ -1,5 +1,4 @@
 import numpy as np
-from Examples import Dodecahedron
 
 def FIND_CHORDS(AdjMatrix, m, V_C, B, Attachments):
     w = V_C[0]
@@ -22,29 +21,3 @@ def FIND_CHORDS(AdjMatrix, m, V_C, B, Attachments):
                 Attachments.append([j, k])
 
     return m , B, Attachments
-
-
-
-# AdjMatrix = np.array([
-#     [0, 1, 1, 1, 0, 1],
-#     [1, 0, 1, 1, 1, 0],
-#     [1, 1, 0, 1, 0, 0],
-#     [1, 1, 1, 0, 1, 1],
-#     [0, 1, 0, 1, 0, 1],
-#     [1, 0, 0, 1, 1, 0]
-# ])
-# m = 0
-# V_C_ = [1,2,3,4,5,6]
-
-# Tetrahedron = np.array([
-#     [0, 1, 1, 1],
-#     [1, 0, 1, 1],
-#     [1, 1, 0, 1],
-#     [1, 1, 1, 0]
-# ]) 
-# m = 0
-# V_C_ = [1,2,3,4]
-# B = []
-# Attachments = []
-
-# print(FIND_CHORDS(Tetrahedron, m, V_C_, B, Attachments))

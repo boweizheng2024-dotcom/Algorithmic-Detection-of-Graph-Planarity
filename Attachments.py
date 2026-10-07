@@ -1,5 +1,3 @@
-from Examples import Dodecahedron
-
 def Finding_Vertices_of_Attachment(AdjList_G, V_C, BRIDGE, m):
     Attachments = [[] for _ in range(m)]
 

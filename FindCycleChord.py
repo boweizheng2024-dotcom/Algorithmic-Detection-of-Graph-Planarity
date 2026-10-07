@@ -1,5 +1,3 @@
-from Examples import Dodecahedron
-
 def Find_a_Cycle_with_a_Chord(AdjList):
     n = len(AdjList)
     visited = [False] * n
@@ -45,29 +43,3 @@ def Find_a_Cycle_with_a_Chord(AdjList):
     for w in range(1, n+1):
         if len(AdjList[w-1]) != 0:
             return FIND_CYCLE_CHORD(w,-1)
-    
-# example
-# Dodecahedron = [[2,5,12],   # v1
-#        [1,3,14],   # v2
-#        [2,4,6],   # v3
-#        [3,5,8],   # v4
-#        [1,4,10],   # v5
-#        [3,7,15],   # v6
-#        [6,8,17],   # v7
-#        [4,7,9],   # v8
-#        [8,10,18],   # v9
-#        [5,9,11],   # v10
-#        [10,12,19],   # v11
-#        [1,11,13],   # v12
-#        [12,14,20],   # v13
-#        [2,13,15],   # v14
-#        [6,14,16],   # v15
-#        [15,17,20],   # v16
-#        [7,16,18],   # v17
-#        [9,17,19],   # v18
-#        [11,18,20],   # v19
-#        [13,16,19]   # v20
-# ]
-# print('cycle = ' + str(Find_a_Cycle_with_a_Chord(Dodecahedron)[0]))
-# print('chord = ' + str(Find_a_Cycle_with_a_Chord(Dodecahedron)[1]))
-# print(algorithm17(Dodecahedron))

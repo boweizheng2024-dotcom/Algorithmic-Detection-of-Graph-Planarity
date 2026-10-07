@@ -2,7 +2,7 @@ from ConnectedComponents import COMPREP, MERGE, FIND_COMPONENT
 from Components_Induced_Subgraph import Finding_Components_of_Induced_Subgraph
 from Bridges_Induced_Subgraph import Finding_the_Bridges
 from Attachments import Finding_Vertices_of_Attachment
-from Updated_Chords import FIND_CHORDS
+from Chords import FIND_CHORDS
 from Conversion import AdjList_to_AdjMatrix, AdjMatrix_to_AdjList
 from interleaving import TEST_INTERLEAVING,TEST_EDGES, CONSTRUCTION
 from Test_Bipartite_Graph import ASSIGNMENT, TEST_BIPARTITE

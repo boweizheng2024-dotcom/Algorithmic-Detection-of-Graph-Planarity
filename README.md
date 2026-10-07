@@ -13,6 +13,7 @@ PlanarDetection(G):
     else:
         Find a cycle C in G* with a chord e
         Find all bridges of C in G* and construct the interleave graph H
+
         if H is not bipartite:
             return G is not planar
         else:
@@ -23,7 +24,7 @@ The main Python implementation is provided in [(main_code)Planar_Detection_Algor
 
 ## Concepts and terminology
 
-- **Graph $G$**: The input is a simple, undirected graph. The code accepts an adjacency list with vertices numbered consecutively from 1 to n. List position i stores the neighbors of vertex i+1.
+- **Graph $G$**: The input is a simple, undirected graph. The code accepts an adjacency list with vertices numbered consecutively from $1$ to $n$. List position $i$ stores the neighbors of vertex $i+1$.
 - **Core $G^*$**: The graph remaining after repeatedly removing vertices of degree one and suppressing vertices of degree two. Suppression removes the degree-two vertex and joins its two neighbors. This reduction preserves whether the graph is planar.
 - **Cycle $C$**: A closed path.
 - **Chord $e$**: An edge joining two non-consecutive vertices of a cycle $C$.
@@ -38,7 +39,7 @@ The main Python implementation is provided in [(main_code)Planar_Detection_Algor
 | Variable | Meaning |
 | --- | --- |
 | `CompPtr` | For the $i$-th element in the list `CompPtr`, if it is a positive number $j$, it means that vertex $j$ is the parent of vertex $i$. If it is a negative number $k$, it means that vertex $i$ is the vertex representation of the connected component of size $-k$ containing $i$ in the induced subgraph $G\[V(G) \setminus V(C)\]$. `0` marks an excluded cycle vertex. |
-| `BRIDGE` | `BRIDGE$[u]` > 0 indicates the vertex $u$ belongs to the $m$-th bridge.|
+| `BRIDGE` | `BRIDGE[u]` > 0 indicates the vertex $u$ belongs to the $m$-th bridge.|
 | `m` |  The number of bridges except chords. |
 | `B` | The edge lists for the bridges. |
 | `Attachments` | `Attachments[i]` collects the vertices of attachment of the $(i+1)$-th bridge of $C$. |
@@ -52,7 +53,7 @@ The main Python implementation is provided in [(main_code)Planar_Detection_Algor
 
 ## Computational Complexity
 
-- $O(n^4 \log_2 n)$, where $n$ is the number of vertices
+- $O(n^4 \log_2 n)$, where $n$ is the number of vertices.
 
 
 ## Reference

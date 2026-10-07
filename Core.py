@@ -1,5 +1,4 @@
 import numpy as np
-from Examples import Dodecahedron
 
 def DELETING_DEGREE_ONE_AND_TWO(AdjMatrix,w):
     N_w = []

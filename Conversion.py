@@ -1,5 +1,4 @@
 import numpy as np
-from Examples import Dodecahedron
 
 def AdjList_to_AdjMatrix(AdjList):
     n = len(AdjList)
@@ -21,8 +20,3 @@ def AdjMatrix_to_AdjList(AdjMatrix):
                 AdjList[u-1].append(v)
 
     return AdjList
-
-# examples:
-AdjMatrix_G = AdjList_to_AdjMatrix(Dodecahedron)
-print(AdjMatrix_G)
-print(AdjMatrix_to_AdjList(AdjMatrix_G))

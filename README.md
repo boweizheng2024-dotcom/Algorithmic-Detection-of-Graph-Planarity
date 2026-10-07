@@ -19,7 +19,7 @@ PlanarDetection(G):
             return PlanarDetection(G* - e)
 ```
 
-The main Python implementation is provided in [(main_code)Planar_Detection_Algorithm.py]([https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/edit/main/README.md#:~:text=Planar_Detection_Algorithm](https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/blob/main/(main_code)Planar_Detection_Algorithm.py)). The other .py files contain the sub-algorithms used by the main implementation.
+The main Python implementation is provided in [(main_code)Planar_Detection_Algorithm.py](https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/blob/main/(main_code)Planar_Detection_Algorithm.py). The other .py files contain the sub-algorithms used by the main implementation.
 
 ## Concepts and terminology
 
@@ -32,43 +32,15 @@ The main Python implementation is provided in [(main_code)Planar_Detection_Algor
 - **Interleaving bridges**: Two bridges interleave when their attachment vertices alternate around $C$: for distinct cycle vertices $a,b,c,d$ in cyclic order, one bridge attaches to $a$ and $c$, and the other to $b$ and $d$.
 - **Interleave graph $H$**: $H$ has one vertex per bridge. Two vertices are adjacent exactly when their corresponding bridges interleave.
 - **Bipartite graph**: A graph whose vertices can be divided into two independent sets.
-## Code definitions
 
-### Main routine
 
-- `Planar_Detection(AdjList_G)`: Implements Algorithm 2. It converts the input to a matrix, finds the core, selects a cycle with a chord, builds bridge attachments and H, tests H for bipartiteness, and recurses after removing the chord. Returns `True` for planar and `False` for non-planar.
-- `Finding_Bridegs_Attachments(AdjList_G, V_C)` (nested helper): Collects components outside C, numbers their bridges, finds their cycle attachments, then adds each chord as its own bridge.
-- `whether_core_is_empty(AdjMatrix_core)` (nested helper): Returns whether the core matrix contains any edges; an empty core is the planar base case.
-
-### Core, cycles, and representations
-
-- `DELETING_DEGREE_ONE_AND_TWO(AdjMatrix, w)`: Recursively removes a degree-one vertex or suppresses a degree-two vertex `w`, updating the matrix in place.
-- `FIND_THE_CORE(AdjMatrix)`: Applies the degree-one/two reduction to every vertex and returns the resulting core matrix.
-- `Find_a_Cycle_with_a_Chord(AdjList)`: Searches the adjacency-list graph and returns the selected cycle, chord, and chord endpoints. Its nested `FIND_CYCLE_CHORD(v, p)` performs the depth-first traversal and assembles the cycle and chord from parent links.
-- `AdjList_to_AdjMatrix(AdjList)`: Converts the 1-based adjacency-list representation to a NumPy adjacency matrix.
-- `AdjMatrix_to_AdjList(AdjMatrix)`: Converts a matrix back to adjacency lists with 1-based neighbor labels.
-
-### Components, bridges, and attachments
-
-- `COMPREP(CompPtr, u)`: Finds the representative of the component containing `u`, with path compression.
-- `MERGE(CompPtr, uRep, vRep)`: Joins two component representatives by size.
-- `FIND_COMPONENT(AdjList)`: Computes connected-component representatives for the graph; used by the bipartite checker.
-- `Finding_Components_of_Induced_Subgraph(AdjList_G, V_C)`: Finds components induced by vertices outside the selected cycle; cycle vertices are marked and excluded.
-- `Finding_the_Bridges(AdjList_G, CompPtr)`: Labels the outside components as bridges and returns the bridge count, vertex-to-bridge map, and edge lists.
-- `Finding_Vertices_of_Attachment(AdjList_G, V_C, BRIDGE, m)`: Collects cycle positions that attach to each non-chord bridge.
-- `FIND_CHORDS(AdjMatrix, m, V_C, B, Attachments)`: Finds chords of the ordered cycle and adds each chord as a one-edge bridge with its two attachment positions.
-
-### Interleaving and bipartiteness
-
-- `TEST_INTERLEAVING(front, back, a, b)`: Recursively checks whether attachment positions alternate between two bridges on the cycle.
-- `TEST_EDGES(attB_q, attB_p)`: Determines whether two bridges interleave based on their attachment lists.
-- `CONSTRUCTION(Attachments)`: Builds H as an adjacency list from the bridge attachment lists.
-- `ASSIGNMENT(AdjList_G, partition, parents)`: Propagates the two-color assignment across a frontier; returns `False` if an edge joins equal colors.
-- `TEST_BIPARTITE(AdjList_G)`: Checks every connected component of H and returns whether H is bipartite.
-
-### Supporting data
+## Supporting data
 
 - `Examples.py`: Defines the `Tetrahedron`, `Cube`, `Octahedron`, `Dodecahedron`, and `Icosahedron` sample adjacency lists. The main file uses `Dodecahedron` for its included example.
+
+## Computational Complexity
+
+- $O(n^4 \log_2 n)$, where $n$ is the number of vertices
 
 
 ## Reference

@@ -19,7 +19,7 @@ PlanarDetection(G):
             return PlanarDetection(G* - e)
 ```
 
-The main Python implementation is provided in [(main_code)Planar_Detection_Algorithm.py](https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/edit/main/README.md#:~:text=Planar_Detection_Algorithm). The other .py files contain the sub-algorithms used by the main implementation.
+The main Python implementation is provided in [(main_code)Planar_Detection_Algorithm.py]([https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/edit/main/README.md#:~:text=Planar_Detection_Algorithm](https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/blob/main/(main_code)Planar_Detection_Algorithm.py)). The other .py files contain the sub-algorithms used by the main implementation.
 
 ## Concepts and terminology
 

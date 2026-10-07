@@ -52,8 +52,3 @@ def CONSTRUCTION(Attachments):
                 AdjList_H[j].append(i+1)
     
     return AdjList_H
-
-# example
-# print(CONSTRUCTION([[0, 2, 4, 6, 8], [1, 3, 5, 7, 9]]))
-# print('V_H = ' + str(CONSTRUCTION([[1,2], [1,2,3], [1,2,3,4], [1,2,3,4]])[0]))
-# print('E_H = ' + str(CONSTRUCTION([[1,2], [1,2,3], [1,2,3,4], [1,2,3,4]])[1]))

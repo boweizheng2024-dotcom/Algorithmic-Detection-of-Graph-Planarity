@@ -39,12 +39,14 @@ The thesis states the recursive step as: **G is planar if and only if G* - e is 
 ### Main routine
 
 - `Planar_Detection(AdjList_G)`: Implements Algorithm 2. It converts the input to a matrix, finds the core, selects a cycle with a chord, builds bridge attachments and H, tests H for bipartiteness, and recurses after removing the chord. Returns `True` for planar and `False` for non-planar.
+- `Finding_Bridegs_Attachments(AdjList_G, V_C)` (nested helper): Collects components outside C, numbers their bridges, finds their cycle attachments, then adds each chord as its own bridge.
+- `whether_core_is_empty(AdjMatrix_core)` (nested helper): Returns whether the core matrix contains any edges; an empty core is the planar base case.
 
 ### Core, cycles, and representations
 
 - `DELETING_DEGREE_ONE_AND_TWO(AdjMatrix, w)`: Recursively removes a degree-one vertex or suppresses a degree-two vertex `w`, updating the matrix in place.
 - `FIND_THE_CORE(AdjMatrix)`: Applies the degree-one/two reduction to every vertex and returns the resulting core matrix.
-- `Find_a_Cycle_with_a_Chord(AdjList)`: Searches the adjacency-list graph and returns the selected cycle, chord, and chord endpoints.
+- `Find_a_Cycle_with_a_Chord(AdjList)`: Searches the adjacency-list graph and returns the selected cycle, chord, and chord endpoints. Its nested `FIND_CYCLE_CHORD(v, p)` performs the depth-first traversal and assembles the cycle and chord from parent links.
 - `AdjList_to_AdjMatrix(AdjList)`: Converts the 1-based adjacency-list representation to a NumPy adjacency matrix.
 - `AdjMatrix_to_AdjList(AdjMatrix)`: Converts a matrix back to adjacency lists with 1-based neighbor labels.
 
@@ -68,7 +70,7 @@ The thesis states the recursive step as: **G is planar if and only if G* - e is 
 
 ### Supporting data
 
-- `Examples.py`: Provides adjacency-list examples including a tetrahedron, cube, octahedron, dodecahedron, and icosahedron. The main file runs the detector on `Dodecahedron` when executed directly as supplied.
+- `Examples.py`: Defines the `Tetrahedron`, `Cube`, `Octahedron`, `Dodecahedron`, and `Icosahedron` sample adjacency lists. The main file uses `Dodecahedron` for its included example.
 
 ## Important implementation variables
 
@@ -94,7 +96,7 @@ python -m pip install numpy
 python Planar_Detection_Algorithm.py
 ```
 
-The script prints the result for the dodecahedron example. To test another graph, pass an adjacency list to `Planar_Detection(AdjList_G)`.
+The script prints the result for the dodecahedron example. To test another graph, pass an adjacency list to `Planar_Detection(AdjList_G)`. The supplied source also contains a top-level example print in `Conversion.py`, so importing the main module prints the conversion example before the planarity result.
 
 ## Repository files
 

@@ -33,6 +33,18 @@ The main Python implementation is provided in [(main_code)Planar_Detection_Algor
 - **Interleave graph $H$**: $H$ has one vertex per bridge. Two vertices are adjacent exactly when their corresponding bridges interleave.
 - **Bipartite graph**: A graph whose vertices can be divided into two independent sets.
 
+## Implementation of Important Variables
+
+| Variable | Meaning |
+| --- | --- |
+| `CompPtr` | For the $i$-th element in the list `CompPtr`, if it is a positive number $j$, it means that vertex $j$ is the parent of vertex $i$. If it is a negative number $k$, it means that vertex $i$ is the vertex representation of the connected component of size $-k$ containing $i$ in the induced subgraph $G\[V(G) \setminus V(C)\]$. `0` marks an excluded cycle vertex. |
+| `BRIDGE` | `BRIDGE$[u]` > 0 indicates the vertex $u$ belongs to the $m$-th bridge.|
+| `m` |  The number of bridges except chords. |
+| `B` | The edge lists for the bridges. |
+| `Attachments` | `Attachments[i]` collects the vertices of attachment of the $(i+1)$-th bridge of $C$. |
+| `Attachments_` | `Attachments` together with the vertices of attachment of chords of $C$. |
+| `chord_v1`, `chord_v2` | The two endpoints of the chord selected for removal in a recursive step. |
+
 
 ## Supporting data
 

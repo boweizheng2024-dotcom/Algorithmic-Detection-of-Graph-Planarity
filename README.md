@@ -1,39 +1,37 @@
 # Algorithmic Detection of Graph Planarity
 
-A Python implementation of the recursive planarity test described as **Algorithm 2: Planar Detection** in *2145768_Bowei Zheng_2025.pdf* (Chapter 3, Graph Planarity Detection). The algorithm is based on graph cores, cycle bridges, bridge attachments, and bipartiteness of the interleave graph.
+An algorithm is designed to detect the planarity of any simple graph, the pseudocode is shown as follows.
 
-## Algorithm 2: Planar Detection
+## Planar Detection
 
 ```text
 PlanarDetection(G):
-    G* <- Find the core of G
+    Find the core G* of G
 
     if G* is empty:
-        return PLANAR
-
-    Find a cycle C in G* that has a chord e
-    Find all bridges of C in G* and construct the interleave graph H
-
-    if H is not bipartite:
-        return NON-PLANAR
-
-    return PlanarDetection(G* - e)
+        return G is planar
+    else:
+        Find a cycle C in G* with a chord e
+        Find all bridges of C in G* and construct the interleave graph H
+        if H is not bipartite:
+            return G is not planar
+        else:
+            return PlanarDetection(G* - e)
 ```
 
-The thesis states the recursive step as: **G is planar if and only if G* - e is planar**. The code realizes this by recursively testing the core with the selected chord removed.
+The main Python implementation is provided in [(main_code)Planar_Detection_Algorithm.py](https://github.com/boweizheng2024-dotcom/Algorithmic-Detection-of-Graph-Planarity/edit/main/README.md#:~:text=Planar_Detection_Algorithm). The other .py files contain the sub-algorithms used by the main implementation.
 
 ## Concepts and terminology
 
-- **Graph G**: The input is a simple, undirected graph. The code accepts an adjacency list with vertices numbered consecutively from 1 to n. List position i stores the neighbors of vertex i+1.
-- **Core G\***: The graph remaining after repeatedly removing vertices of degree one and suppressing vertices of degree two. Suppression removes the degree-two vertex and joins its two neighbors. This reduction preserves whether the graph is planar. In the implementation, `FIND_THE_CORE` applies this reduction to an adjacency matrix.
-- **Cycle C**: A closed path in the core. `V_C` stores its vertices in cyclic order, using the code's 1-based vertex labels.
-- **Chord e**: An edge joining two non-consecutive vertices of C. `Find_a_Cycle_with_a_Chord` returns a cycle and a chord; `Planar_Detection` removes that chord before its recursive call.
-- **Bridge of C**: In the thesis's terminology, a bridge is either a connected component outside C together with its edges to C, or a single chord of C. This is distinct from the common graph-theory meaning of a cut edge.
-- **Vertex of attachment**: A vertex of C incident to an edge in a given bridge. A bridge may attach to several vertices of the cycle.
-- **Interleaving bridges**: Two bridges interleave when their attachment vertices alternate around C: for distinct cycle vertices a,b,c,d in cyclic order, one bridge attaches to a and c, and the other to b and d.
-- **Interleave graph H**: H has one vertex per bridge. Two vertices are adjacent exactly when their corresponding bridges interleave.
-- **Bipartite graph**: A graph whose vertices can be divided into two independent sets. The two sets represent placing bridges on opposite sides of C. If H is not bipartite, the input graph is non-planar; if it is bipartite, the algorithm removes a chord and continues recursively.
-
+- **Graph $G$**: The input is a simple, undirected graph. The code accepts an adjacency list with vertices numbered consecutively from 1 to n. List position i stores the neighbors of vertex i+1.
+- **Core $G^*$**: The graph remaining after repeatedly removing vertices of degree one and suppressing vertices of degree two. Suppression removes the degree-two vertex and joins its two neighbors. This reduction preserves whether the graph is planar.
+- **Cycle $C$**: A closed path.
+- **Chord $e$**: An edge joining two non-consecutive vertices of a cycle $C$.
+- **Bridge of a Cycle $C$**: In this content, a bridge is either a connected component outside $C$ together with any edges joining that connected component to $C$, or a single chord of $C$. This is distinct from the common graph-theory meaning of a cut edge.
+- **Vertex of attachment of a bridge of $C$**: Vertices of $C$ which are end vertices of edges in the bridge.
+- **Interleaving bridges**: Two bridges interleave when their attachment vertices alternate around $C$: for distinct cycle vertices $a,b,c,d$ in cyclic order, one bridge attaches to $a$ and $c$, and the other to $b$ and $d$.
+- **Interleave graph $H$**: $H$ has one vertex per bridge. Two vertices are adjacent exactly when their corresponding bridges interleave.
+- **Bipartite graph**: A graph whose vertices can be divided into two independent sets.
 ## Code definitions
 
 ### Main routine
@@ -72,32 +70,9 @@ The thesis states the recursive step as: **G is planar if and only if G* - e is 
 
 - `Examples.py`: Defines the `Tetrahedron`, `Cube`, `Octahedron`, `Dodecahedron`, and `Icosahedron` sample adjacency lists. The main file uses `Dodecahedron` for its included example.
 
-## Important implementation variables
 
-| Name | Meaning |
-| --- | --- |
-| `AdjList_G` | Input graph as an adjacency list; vertex IDs and neighbor values are 1-based. |
-| `AdjMatrix` | NumPy 0/1 adjacency matrix; matrix index `i` corresponds to vertex `i+1`. |
-| `V_C` | Cycle vertices in cyclic order. Attachment lists store positions in this sequence, starting at 0. |
-| `CompPtr` | Disjoint-set structure: a negative value marks a representative and stores component size; a positive value points to a parent; 0 marks an excluded cycle vertex. |
-| `BRIDGE` | Maps each non-cycle vertex to a positive bridge number; cycle entries are not assigned a bridge. |
-| `m` | Number of bridges found so far, before adding the chords. |
-| `B` | Edge lists for the bridges; chord edges are stored as strings such as `"2-5"`. |
-| `Attachments` | For each bridge, the positions of its attachment vertices in `V_C`. |
-| `H` / `Interleave_Graph` | The interleave graph whose bipartiteness determines whether the bridges can be placed on two sides of the cycle. |
-| `chord_v1`, `chord_v2` | Endpoints of the chord selected for removal in a recursive step. |
+## Reference
 
-## Run
+Part ii - catam. https://www.maths.cam.ac.uk/undergrad/catam/II, 2024. Accessed: 2024-09-07.
 
-Requirements: Python 3 and NumPy.
 
-```bash
-python -m pip install numpy
-python Planar_Detection_Algorithm.py
-```
-
-The script prints the result for the dodecahedron example. To test another graph, pass an adjacency list to `Planar_Detection(AdjList_G)`. The supplied source also contains a top-level example print in `Conversion.py`, so importing the main module prints the conversion example before the planarity result.
-
-## Repository files
-
-The helper modules imported by the main routine are included alongside it so that the relative imports work from the repository root. The source PDF is not included.
